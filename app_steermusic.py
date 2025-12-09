@@ -28,7 +28,19 @@ def steermusic_edit(audio_path, source_prompt, target_prompt,
     ]
 
     try:
-        subprocess.run(cmd, check=True)
+        yield "Running SteerMusic…", None
+
+        process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
+            )
+        for line in process.stdout:
+            # Stream each line to browser
+            yield f"{line.strip()}", None
+        process.wait()
     except Exception as e:
         return f"Error while running SteerMusic: {e}", None
 
@@ -41,7 +53,7 @@ def steermusic_edit(audio_path, source_prompt, target_prompt,
     # Load the first wav as (sample_rate, numpy_array)
     sr, data = wav_read(wavs[0])
 
-    return "Success!", (sr, data)
+    yield "Success!", (sr, data)
     # wavs = sorted(glob.glob(os.path.join(out_dir, "*.wav")))
     # if not wavs:
     #     return "No output audio was produced.", None
