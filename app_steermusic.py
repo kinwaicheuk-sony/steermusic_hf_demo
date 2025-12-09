@@ -22,9 +22,9 @@ def steermusic_edit(audio_path, source_prompt, target_prompt,
         "--prompt", target_prompt,
         "--prompt_ref", source_prompt,
         "--output_dir", out_dir,
-        "--guidance_scale", int(guidance_scale),
-        "--weight_aug", int(weight_aug),
-        "--validation_step", int(step_aug),
+        "--guidance_scale", str(guidance_scale),
+        "--weight_aug", str(weight_aug),
+        "--validation_step", str(step_aug),
     ]
 
     try:
