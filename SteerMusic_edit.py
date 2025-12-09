@@ -10,7 +10,7 @@ import torch.nn.functional as F
 from preprocessor import Preprocessor
 import argparse
 
-# device = "cuda" if torch.cuda.is_available() else "cpu"
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--audio_path', type=str)
